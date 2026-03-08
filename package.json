@@ -1,0 +1,74 @@
+{
+  "name": "debug-error-sound",
+  "displayName": "Debug Error Sound",
+  "description": "Plays a custom sound when errors occur during debugging in VS Code",
+  "version": "1.0.0",
+  "publisher": "your-publisher-id",
+  "icon": "icon.png",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": ["Other"],
+  "activationEvents": ["onDebug"],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "debugErrorSound.testSound",
+        "title": "Debug Error Sound: Test Sound"
+      },
+      {
+        "command": "debugErrorSound.selectSound",
+        "title": "Debug Error Sound: Select Sound Profile"
+      }
+    ],
+    "configuration": {
+      "title": "Debug Error Sound",
+      "properties": {
+        "debugErrorSound.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable or disable debug error sounds"
+        },
+        "debugErrorSound.soundProfile": {
+          "type": "string",
+          "default": "classic",
+          "enum": ["classic", "retro", "subtle", "dramatic"],
+          "description": "Choose your error sound profile"
+        },
+        "debugErrorSound.volume": {
+          "type": "number",
+          "default": 0.8,
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "description": "Volume level for error sounds (0.0 to 1.0)"
+        },
+        "debugErrorSound.playOnBreakpoint": {
+          "type": "boolean",
+          "default": true,
+          "description": "Play sound when hitting a breakpoint during debug"
+        },
+        "debugErrorSound.playOnException": {
+          "type": "boolean",
+          "default": true,
+          "description": "Play sound when an exception is thrown during debug"
+        },
+        "debugErrorSound.customSoundPath": {
+          "type": "string",
+          "default": "",
+          "description": "Path to a custom .wav or .mp3 sound file"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "@types/vscode": "^1.74.0",
+    "typescript": "^5.0.0"
+  }
+}
